@@ -1,11 +1,7 @@
 package com.erick.herrera.pkassessment.feature_card_list.domain.use_case.get_cards
 
-import com.erick.herrera.pkassessment.common.Resource
 import com.erick.herrera.pkassessment.feature_card_list.data.repository.TestCardRepository
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
