@@ -1,6 +1,7 @@
 package com.erick.herrera.pkassessment.feature_card_list.presentation.card_list.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,8 +10,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomStart
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -18,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.erick.herrera.pkassessment.common.color
+import com.erick.herrera.pkassessment.common.screenRectDp
+import com.erick.herrera.pkassessment.common.screenRectPx
 import com.erick.herrera.pkassessment.feature_card_list.data.remote.dto.CardData
 
 
@@ -106,12 +112,12 @@ fun TitleDescriptionCarditem(card: CardData) {
 @Composable
 fun ImageCardItem(card: CardData) {
 
+
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
-            .height(500.dp)
-            .wrapContentHeight(align = CenterVertically)
-            .fillMaxWidth(),
+            .height( (card.card.image.size.height / 3.5).dp )
+            .width( (card.card.image.size.width / 3.5).dp ),
         elevation = 2.dp,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
@@ -124,7 +130,37 @@ fun ImageCardItem(card: CardData) {
                 painter = rememberImagePainter(card.card.image.url),
                 contentDescription = card.card.title.value,
                 contentScale = ContentScale.None
+
             )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+
+
+                Column {
+                    Text(
+                        text = card.card.title.value,
+                        style = TextStyle(
+                            color = card.card.title.attributes.textColor.color,
+                            fontSize = card.card.title.attributes.font.size.sp
+                        )
+                    )
+
+                    Text(
+                        text = card.card.description.value,
+                        style = TextStyle(
+                            color = card.card.description.attributes.textColor.color,
+                            fontSize = card.card.description.attributes.font.size.sp
+                        )
+                    )
+
+
+                }
+
+            }
 
         }
 
